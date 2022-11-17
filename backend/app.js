@@ -6,14 +6,11 @@ var logger = require('morgan');
 
 require('dotenv').config()
 
+// ROUTES
 var indexRouter = require('./routes/index');
 var giphyRouter = require('./routes/giphy');
 
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -21,6 +18,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// CRON Jobs
+var scheduledGIPHY = require('./worker/fetch-giphy').scheduledGIPHY
+scheduledGIPHY()
+
+// ENDPOINTS
 app.use('/', indexRouter);
 app.use('/giphy', giphyRouter);
 

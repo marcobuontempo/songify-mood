@@ -6,7 +6,7 @@ var logger = require('morgan');
 let mongoose = require('mongoose')
 require('dotenv').config()
 
-var scheduledFetchGIF = require('./worker/fetch-gifs').scheduledFetchGIF
+const scheduledFetchGIF = require('./worker/fetch-gifs').scheduledFetchGIF
 
 // ROUTES
 var indexRouter = require('./routes/index');
@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 // CRON JOBS
-// scheduledFetchGIF()
+scheduledFetchGIF()
 
 // ENDPOINTS
 app.use('/', indexRouter);

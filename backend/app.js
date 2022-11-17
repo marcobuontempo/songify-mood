@@ -3,21 +3,32 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var scheduledFetchGIF = require('./worker/fetch-gifs').scheduledFetchGIF
-
+let mongoose = require('mongoose')
 require('dotenv').config()
+
+var scheduledFetchGIF = require('./worker/fetch-gifs').scheduledFetchGIF
 
 // ROUTES
 var indexRouter = require('./routes/index');
-var giphyRouter = require('./routes/gifs');
+var gifsRouter = require('./routes/gifs');
 
 var app = express();
 
+// MIDDLEWARE
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// DATABASE
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log('Database connection successful')
+    })
+    .catch(err => {
+      console.error('Database connection error', err)
+    })
 
 
 // CRON JOBS
@@ -25,15 +36,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ENDPOINTS
 app.use('/', indexRouter);
-app.use('/giphy', giphyRouter);
+app.use('/giphy', gifsRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

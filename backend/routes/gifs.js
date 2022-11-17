@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-var controller = require("../controllers/giphy-controller")
+var controller = require("../controllers/gifs-controller")
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send("/giphy Endpoint")
+  res.send("/gifs Endpoint")
 });
 
 module.exports = router;

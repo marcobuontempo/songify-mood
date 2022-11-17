@@ -3,12 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var scheduledFetchGIF = require('./worker/fetch-gifs').scheduledFetchGIF
 
 require('dotenv').config()
 
 // ROUTES
 var indexRouter = require('./routes/index');
-var giphyRouter = require('./routes/giphy');
+var giphyRouter = require('./routes/gifs');
 
 var app = express();
 
@@ -19,9 +20,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// CRON Jobs
-var scheduledGIPHY = require('./worker/fetch-giphy').scheduledGIPHY
-scheduledGIPHY()
+// CRON JOBS
+// scheduledFetchGIF()
 
 // ENDPOINTS
 app.use('/', indexRouter);

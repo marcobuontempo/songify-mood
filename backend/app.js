@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let mongoose = require('mongoose')
 require('dotenv').config()
-
-const scheduledFetchGIF = require('./worker/fetch-gifs').scheduledFetchGIF
+const cronScheduler = require('./worker/cron-scheduler')
 
 // ROUTES
 var indexRouter = require('./routes/index');
@@ -32,11 +31,11 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 // CRON JOBS
-scheduledFetchGIF()
+cronScheduler()
 
 // ENDPOINTS
 app.use('/', indexRouter);
-app.use('/giphy', gifsRouter);
+app.use('/gifs', gifsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

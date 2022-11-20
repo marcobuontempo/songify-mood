@@ -26,9 +26,9 @@ module.exports.fetchTrendingGIFs = async () => {
 // returns the response from DB (i.e. the array of inserted docs with new _id)
 module.exports.insertGIFsToDB = async (updatedGIFsArr) => {
   try {
-    // if (updatedGIFsArr.length !== 15) {
-    //   throw Error(`Unexpected fetch result - only fetched ${updatedGIFsArr.length} documents`)
-    // }
+    if (updatedGIFsArr.length !== 15) {
+      throw Error(`Unexpected fetch result - only fetched ${updatedGIFsArr.length} documents`)
+    }
 
     // insert new documents
     console.log("updating gifs in db...")

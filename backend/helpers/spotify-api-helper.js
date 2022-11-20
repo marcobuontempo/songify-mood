@@ -1,6 +1,8 @@
 const axios = require("axios");
 const SpotifyModel = require('../models/spotify-model')
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
 // get spotify authorisation token and api access
 // returns auth token for future API calls
 module.exports.getSpotifyAuthToken = async () => {
@@ -33,7 +35,6 @@ const searchSpotifyTracks = async (authToken, searchTerms) => {
   return await axios.get("https://api.spotify.com/v1/search?type=track&limit=1&q=" + searchTerms, { headers: { 'Authorization': `${authToken.token_type} ${authToken.access_token}`, 'Content-Type': 'application/json' } })
     .then(res => res.data)
     .then(data => {
-      console.log("done:", data.tracks.items)
       return data.tracks.items
     })
     .catch(err => {
@@ -47,7 +48,8 @@ const getRandom = (inpArr) => {
 }
 
 const searchRandomSpotifyTrack = async (authToken) => {
-  const randomCharacter = getRandom("abcdefghijklmnopqrstuvwxyz") + "%"  // get random letter and append wildcard character to end
+  console.log("getting track 2...")
+  const randomCharacter = getRandom("abcdefghijklmnopqrstuvwxyz") + "*"  // get random letter and append wildcard character to end
   const randomOffset = Math.floor(Math.random() * 100)
   const searchTerm = randomCharacter + "&offset=" + randomOffset
   return await searchSpotifyTracks(authToken, searchTerm)
@@ -55,11 +57,26 @@ const searchRandomSpotifyTrack = async (authToken) => {
 
 // Returns a spotify track based on search query. If search returns no tracks, fetches a random track instead
 const getSpotifyTrack = async (authToken, searchTerms) => {
-  const tracks = searchSpotifyTracks(authToken, searchTerms)
-  if (tracks.length === 0) {
-    tracks = await searchRandomSpotifyTrack(authToken)
+  let attempts = 0
+  try {
+    console.log("getting track 3...")
+    let tracks = await searchSpotifyTracks(authToken, searchTerms)
+    if (tracks.length === 0) {
+      tracks = await searchRandomSpotifyTrack(authToken)
+    }
+    console.log(tracks[0].external_urls.spotify)
+    return tracks[0].external_urls.spotify
   }
-  return tracks[0]
+  catch (err) {
+    attempts += 1
+    if (attempts <= 5) {
+      console.log("Error fetching track... trying again in 1 minute", err.message)
+      await sleep(60000)
+      return await getSpotifyTrack(authToken, searchTerms)
+    } else {
+      throw Error("Maximum attempts of fetching track failed")
+    }
+  }
 }
 
 
@@ -67,10 +84,9 @@ const getSpotifyTrack = async (authToken, searchTerms) => {
 // returns objects of each spotify doc to insert to MongoDB
 module.exports.createSpotifyCombinations = async (authToken, GIFsDocs) => {
   // ensure there are 15 docs
-  // if (GIFsDocs.length !== 15) {
-  //   throw Error("Invalid documents")
-  // }
-
+  if (GIFsDocs.length !== 15) {
+    throw Error("Invalid documents")
+  }
 
   // Get all size=3 combinations of indexes 0-14 (i.e. index for each )
   const idxs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
@@ -80,7 +96,7 @@ module.exports.createSpotifyCombinations = async (authToken, GIFsDocs) => {
       for (let k = j + 1; k < idxs.length; k++) {
         const docs = [ GIFsDocs[idxs[i]], GIFsDocs[idxs[j]], GIFsDocs[idxs[k]] ]
         const joinedTags = docs.map(doc => getRandom(doc.tags)).join(" ")
-
+        await sleep(1000)
         const newDoc = {
           gif_ids: docs.map(doc => doc._id),
           song_url: await getSpotifyTrack(authToken, joinedTags)
@@ -94,9 +110,9 @@ module.exports.createSpotifyCombinations = async (authToken, GIFsDocs) => {
 
 module.exports.insertSpotifyDocsToDB = async (newSpotifyDocs) => {
   // ensure input is correct    ->    15 gifs = 455 combinations
-  // if (newSpotifyDocs.length !== 455) {
-  //   throw Error("Incorrect array input size")
-  // }
+  if (newSpotifyDocs.length !== 455) {
+    throw Error("Incorrect array input size")
+  }
 
   console.log("updating Spotify docs in DB...")
   const insertedDocs = await SpotifyModel.insertMany(newSpotifyDocs)

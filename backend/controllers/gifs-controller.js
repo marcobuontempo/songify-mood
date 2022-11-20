@@ -1,9 +1,13 @@
 const GIFsModel = require('../models/gifs-model');
 
-module.exports.getAllGifs = (req, res, next) => {
-  res.send("/gifs Endpoint")
+// Sends all GIF docs from DB
+module.exports.getAllGifs = async (req, res, next) => {
+  const docs = await GIFsModel.find()
+  res.status(200).send(docs)
 }
 
+
+// Sends 6 random GIF docs from DB
 module.exports.getRandomGifs = async (req, res, next) => {
   // Get 6 random indices
   const randIdxs = []
@@ -17,5 +21,5 @@ module.exports.getRandomGifs = async (req, res, next) => {
   const allDocs = await GIFsModel.find()
   const randDocs = randIdxs.map(i => allDocs[i])
 
-  res.send(randDocs)
+  res.status(200).send(randDocs)
 }

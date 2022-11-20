@@ -3,9 +3,7 @@ var router = express.Router();
 
 var controller = require("../controllers/songs-controller")
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send("/songs Endpoint")
-});
+/* GET all songs. */
+router.get('/', controller.getAllSongs);
 
 module.exports = router;

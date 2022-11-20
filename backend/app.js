@@ -2,6 +2,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let mongoose = require('mongoose')
@@ -15,6 +16,7 @@ var songsRouter = require('./routes/songs');
 // EXPRESS APP
 var app = express();
 // MIDDLEWARE
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

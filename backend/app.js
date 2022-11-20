@@ -58,3 +58,21 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
+/* 
+  ======== Required fields for .env ========
+  # EXPRESS
+  PORT = xxxx
+
+  # MONGODB
+  MONGO_URI = mongodb+srv://xxxx:xxxx@xxxx.xxxxxxx.mongodb.net/xxxxxxxx?retryWrites=true&w=majority
+
+  # GIFs
+  GIF_API_KEY = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+  # SPOTIFY
+  SPOTIFY_CLIENT_ID = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  SPOTIFY_CLIENT_SECRET = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+*/

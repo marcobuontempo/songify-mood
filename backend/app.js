@@ -10,6 +10,7 @@ const cronScheduler = require('./worker/cron-scheduler')
 // ROUTES
 var indexRouter = require('./routes/index');
 var gifsRouter = require('./routes/gifs');
+var songsRouter = require('./routes/songs');
 
 // EXPRESS APP
 var app = express();
@@ -33,9 +34,10 @@ mongoose.connect(process.env.MONGO_URI)
 // CRON JOBS
 cronScheduler()
 
-// ENDPOINTS
+// MAIN ENDPOINTS
 app.use('/', indexRouter);
 app.use('/gifs', gifsRouter);
+app.use('/songs', songsRouter)
 
 
 // ERROR HANDLERS

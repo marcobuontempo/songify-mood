@@ -137,12 +137,6 @@ module.exports.deleteOldSpotifyDocsFromDB = async (insertedDocs) => {
   }
 }
 
-// TODO: FRONTEND
-// 6 random GIFa from the 15 in DB are selected ->
-// 2 GIFs shown to user at a time, user selects 1 choice of each ->
-// Lookup in DB for document where { gifs: { $includesall: [_id1, _id2, _id3] } }
-// Return spotify URL and present in play window to user
-
 
 
 

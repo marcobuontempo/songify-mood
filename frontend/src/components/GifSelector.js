@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import GifDisplay from './GifDisplay/GifDisplay'
 
 const URL = "http://127.0.0.1:4000/gifs/random"
 
 export default function GifSelector() {
+  const navigate = useNavigate()
 
   const [state, setState] = useState({
     gifs: [],
@@ -40,12 +42,16 @@ export default function GifSelector() {
     setState({ ...state, gifs: updatedGifs, validSelection: newValidSelection })
   }
 
+  const submitGifs = () => {
+    navigate("/song", { state: {gifs: state.gifs}})
+  }
+
   return (
     <>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center' }}>
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
       </div>
-      <button disabled={!state.validSelection}>GET MY SONG!</button>
+      <button onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
       {!state.validSelection && <p>Please select 3 GIFs</p>}
     </>
   )

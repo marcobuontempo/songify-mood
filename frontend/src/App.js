@@ -1,12 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
 import GifSelector from './components/GifSelector';
+import SongDisplay from './components/SongDisplay'
+import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <GifSelector></GifSelector>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<GifSelector></GifSelector>} />
+        <Route path="/song" element={<SongDisplay></SongDisplay>} />
+        {/* <Route element={Error} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 

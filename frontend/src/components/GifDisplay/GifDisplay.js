@@ -1,5 +1,5 @@
 import React from 'react'
-import '../GifDisplay/GifDisplay.css'
+import './GifDisplay.css'
 
 export default function GifDisplay(props) {
   const { id, url, selected } = props.gif

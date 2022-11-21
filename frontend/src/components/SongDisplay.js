@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import SongLink from './SongLink';
 
 export default function SongDisplay(props) {
 
   const location = useLocation();
 
   const [state, setState] = useState({
-    gifs: null,
     songData: null
   })
 
 
   useEffect(() => {
-    const gifs = location.state ? location.state.gifs : null
-    setState({...state, gifs: gifs})
+    const songData = location.state ? location.state.songData : null
+    setState({ ...state, songData: songData })
   }, [])
 
   return (
     <div>
-      <a href={props.url}>Click here to see your song!</a>
-      {state.gifs ? <p>{state.gifs[0].url}</p> : <p>No gif input</p>}
+      {state.songData ? <SongLink songData={state.songData}></SongLink> : <p>No song data provided</p>}
     </div>
   )
 }

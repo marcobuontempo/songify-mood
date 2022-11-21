@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import GifDisplay from './GifDisplay/GifDisplay'
 
-const URL = "http://127.0.0.1:4000/gifs/random"
+const GIF_URL = "http://127.0.0.1:4000/gifs/random"
+const SONG_URL = "http://127.0.0.1:4000/songs/find"
 
 export default function GifSelector() {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ export default function GifSelector() {
   }, [])
 
   const getGifs = async () => {
-    const gifDocs = await axios.get(URL)
+    const gifDocs = await axios.get(GIF_URL)
       .then(res => {
         return res.data.map(gif => {
           return {
@@ -42,8 +43,18 @@ export default function GifSelector() {
     setState({ ...state, gifs: updatedGifs, validSelection: newValidSelection })
   }
 
-  const submitGifs = () => {
-    navigate("/song", { state: {gifs: state.gifs}})
+  const submitGifs = async () => {
+    const selectedGifIDs = state.gifs.filter(gif => gif.selected).map(gif => gif.id)
+    const songData = await axios.get(SONG_URL, {
+      params: {
+        id1: selectedGifIDs[0],
+        id2: selectedGifIDs[1],
+        id3: selectedGifIDs[2]
+      }
+    })
+      .then(res => res.data)
+      .then(data => data.song_data)
+    navigate("/song", { state: { songData: songData } })
   }
 
   return (

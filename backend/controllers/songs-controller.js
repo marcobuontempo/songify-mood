@@ -9,7 +9,8 @@ module.exports.getAllSongs = async (req, res, next) => {
 
 // Sends the doc in DB matching all the input _ids
 module.exports.getSongByIds = async (req, res, next) => {
-  const objIds = req.body.gif_ids.map(id => ObjectId(id))
+  const {id1, id2, id3} = req.query
+  const objIds = [id1, id2, id3].map(id => ObjectId(id))
   const doc = await SpotifyModel.findOne({ gif_ids: { "$all": objIds } })
   res.status(200).send(doc)
 }

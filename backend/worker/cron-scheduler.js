@@ -29,3 +29,4 @@ const scheduledUpdateInfo = async () => {
 module.exports = () => cron.schedule("0 */1 * * *", scheduledUpdateInfo, {
   timezone: "Australia/Melbourne"
 });
+module.exports = () => scheduledUpdateInfo();

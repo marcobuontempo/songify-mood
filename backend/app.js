@@ -34,7 +34,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 // CRON JOBS
-cronScheduler()
+// cronScheduler()
 
 // MAIN ENDPOINTS
 app.use('/', indexRouter);

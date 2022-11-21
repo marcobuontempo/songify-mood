@@ -64,8 +64,13 @@ const getSpotifyTrack = async (authToken, searchTerms) => {
     if (tracks.length === 0) {
       tracks = await searchRandomSpotifyTrack(authToken)
     }
-    console.log(tracks[0].external_urls.spotify)
-    return tracks[0].external_urls.spotify
+    const songData = {
+      name: tracks[0].name,
+      artist: tracks[0].artists[0].name,
+      url: tracks[0].external_urls.spotify,
+      preview_url: tracks[0].preview_url
+    }
+    return songData
   }
   catch (err) {
     attempts += 1
@@ -99,7 +104,7 @@ module.exports.createSpotifyCombinations = async (authToken, GIFsDocs) => {
         await sleep(1000)
         const newDoc = {
           gif_ids: docs.map(doc => doc._id),
-          song_url: await getSpotifyTrack(authToken, joinedTags)
+          song_data: await getSpotifyTrack(authToken, joinedTags)
         }
         spotifyDocs.push(newDoc)
       }

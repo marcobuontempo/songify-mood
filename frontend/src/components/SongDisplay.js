@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import SongLink from './SongLink';
+import SongEmbed from './SongEmbed';
+
 
 export default function SongDisplay(props) {
 
@@ -17,8 +18,8 @@ export default function SongDisplay(props) {
   }, [])
 
   return (
-    <div>
-      {state.songData ? <SongLink songData={state.songData}></SongLink> : <p>No song data provided</p>}
-    </div>
+    <>
+      {state.songData ? <SongEmbed songData={state.songData}></SongEmbed> : <p>No song data provided</p>}
+    </>
   )
 }

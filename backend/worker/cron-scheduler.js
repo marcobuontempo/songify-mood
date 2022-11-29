@@ -26,7 +26,6 @@ const scheduledUpdateInfo = async () => {
 }
 
 // cron job to run once every o'clock hour
-module.exports = () => cron.schedule("0 */1 * * *", scheduledUpdateInfo, {
+module.exports = () => cron.schedule("0 0 * * *", scheduledUpdateInfo, {
   timezone: "Australia/Melbourne"
 });
-module.exports = () => scheduledUpdateInfo();

@@ -59,6 +59,7 @@ export default function GifSelector() {
 
   return (
     <>
+      <p>Select 3 GIFs based on your mood, and receive a song based on those selections! There are 455 potential combinations to get :)</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center' }}>
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
       </div>

@@ -20,7 +20,16 @@ export default function SongEmbed(props) {
         frameBorder="0"
         allow="encrypted-media"
         style={{ borderRadius: 5 }} />
-        
+
+      <p>Tags Used:</p>
+      <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+      </ul>
+
+      <button>Try a different combination?</button>
+
     </div>
   )
 }

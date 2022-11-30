@@ -3,20 +3,30 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import GifDisplay from './GifDisplay/GifDisplay'
 
-const GIF_URL = "http://127.0.0.1:4000/gifs/random"
-const SONG_URL = "http://127.0.0.1:4000/songs/find"
+const GIF_URL = process.env.REACT_APP_EXPRESS_URL + "/gifs/random"
+const SONG_URL = process.env.REACT_APP_EXPRESS_URL + "/songs/find"
 
 export default function GifSelector() {
   const navigate = useNavigate()
 
   const [state, setState] = useState({
     gifs: [],
+    amountSelected: 0,
     validSelection: false
   })
 
-  useEffect(() => {
-    getGifs()
-  }, [])
+  const gifContainerStyle = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '1rem',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '50px',
+    margin: '10px',
+    border: '1px solid black',
+    borderRadius: '25px',
+    background: state.amountSelected > 3 ? 'red' : `linear-gradient(to right, black ${state.amountSelected*100/3}%, white 0%)`
+  }
 
   const getGifs = async () => {
     const gifDocs = await axios.get(GIF_URL)
@@ -39,8 +49,13 @@ export default function GifSelector() {
       }
       return gif
     })
-    const newValidSelection = state.gifs.filter(gif => gif.selected).length === 3 ? true : false
-    setState({ ...state, gifs: updatedGifs, validSelection: newValidSelection })
+    const newAmountSelected = state.gifs.filter(gif => gif.selected).length
+    const newValidSelection =  newAmountSelected === 3 ? true : false
+    setState({ 
+      ...state, 
+      gifs: updatedGifs,
+      amountSelected: newAmountSelected,
+      validSelection: newValidSelection })
   }
 
   const submitGifs = async () => {
@@ -57,23 +72,21 @@ export default function GifSelector() {
     navigate("/song", { state: { songData: songData } })
   }
 
+  useEffect(() => {
+    getGifs()
+  }, [])
+
   return (
-    <>
-      <p>Select 3 GIFs based on your mood, and receive a song based on those selections! There are 455 potential combinations to get :)</p>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <p style={{margin: "0"}}>Select 3 GIFs based on your mood, and receive a song based on those selections!</p>
+      <p style={{margin: "0"}}>There are 455 potential combinations to get :)</p>
+      <div style={gifContainerStyle}>
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
       </div>
-      <button onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
-      {!state.validSelection && <p>Please select 3 GIFs</p>}
-    </>
+      <div style={{ textAlign: "center", height: "100px"}}>
+        <button style={{fontSize:"20px"}} onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
+        {!state.validSelection && <p style={{color:"red", fontStyle:"italic"}}>Please select 3 GIFs</p>}
+      </div>
+    </div>
   )
 }
-
-
-// flexbox -> 3x2 gifs
-// each gif when clicked = toggleSelected state
-// selected gif is outlined
-// when 3 selected gifs, no more gifs are selectable
-// press submit button when ready
-// fetches database song link
-// loads new route with suggested song

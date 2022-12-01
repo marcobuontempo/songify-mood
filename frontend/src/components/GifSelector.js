@@ -85,7 +85,7 @@ export default function GifSelector() {
       </div>
       <div style={{ textAlign: "center", height: "100px"}}>
         <button style={{fontSize:"20px"}} onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
-        {!state.validSelection && <p style={{color:"red", fontStyle:"italic"}}>Please select 3 GIFs</p>}
+        {state.validSelection && <p style={{color:"red", fontStyle:"italic"}}>Please select 3 GIFs</p>}
       </div>
     </div>
   )

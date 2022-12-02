@@ -12,7 +12,7 @@ export default function GifSelector() {
   const [state, setState] = useState({
     gifs: [],
     amountSelected: 0,
-    validSelection: false
+    validSelection: false,
   })
 
   const gifContainerStyle = {
@@ -25,7 +25,7 @@ export default function GifSelector() {
     margin: '10px',
     border: '1px solid black',
     borderRadius: '25px',
-    background: state.amountSelected > 3 ? 'red' : `linear-gradient(to right, black ${state.amountSelected*100/3}%, white 0%)`
+    background: "white"
   }
 
   const getGifs = async () => {
@@ -42,6 +42,16 @@ export default function GifSelector() {
     setState({ ...state, gifs: gifDocs })
   }
 
+  const fillBackgroundContainer = (amountSelected) => {
+    if(amountSelected === 3) {
+      return "green"
+    } else if (amountSelected > 3) {
+      return "red"
+    } else {
+      return `linear-gradient(to right, blue ${amountSelected*100/3}%, white 0%)`
+    }
+  }
+
   const toggleSelectedGif = (clickedID) => {
     const updatedGifs = state.gifs.map(gif => {
       if (gif.id === clickedID) {
@@ -50,12 +60,13 @@ export default function GifSelector() {
       return gif
     })
     const newAmountSelected = state.gifs.filter(gif => gif.selected).length
-    const newValidSelection =  newAmountSelected === 3 ? true : false
+    const newValidSelection =  newAmountSelected === 3
     setState({ 
       ...state, 
       gifs: updatedGifs,
       amountSelected: newAmountSelected,
-      validSelection: newValidSelection })
+      validSelection: newValidSelection
+    })
   }
 
   const submitGifs = async () => {
@@ -80,12 +91,12 @@ export default function GifSelector() {
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <p style={{margin: "0"}}>Select 3 GIFs based on your mood, and receive a song based on those selections!</p>
       <p style={{margin: "0"}}>There are 455 potential combinations to get :)</p>
-      <div style={gifContainerStyle}>
+      <div style={{...gifContainerStyle, background: fillBackgroundContainer(state.amountSelected)}}>
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
       </div>
       <div style={{ textAlign: "center", height: "100px"}}>
         <button style={{fontSize:"20px"}} onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
-        {state.validSelection && <p style={{color:"red", fontStyle:"italic"}}>Please select 3 GIFs</p>}
+        {!state.validSelection && <p style={{color:"red", fontStyle:"italic"}}>Please select 3 GIFs</p>}
       </div>
     </div>
   )

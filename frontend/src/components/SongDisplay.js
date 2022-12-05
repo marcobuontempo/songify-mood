@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import SongEmbed from './SongEmbed';
 
 
-export default function SongDisplay(props) {
+export default function SongDisplay() {
 
   const location = useLocation();
 

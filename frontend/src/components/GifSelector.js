@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner';
-import GifDisplay from './GifDisplay/GifDisplay'
+import GifDisplay from './GifDisplay'
 
 const GIF_URL = process.env.REACT_APP_EXPRESS_URL + "/gifs/random"
 const SONG_URL = process.env.REACT_APP_EXPRESS_URL + "/songs/find"
@@ -54,11 +54,11 @@ export default function GifSelector() {
 
   const fillBackgroundContainer = (amountSelected) => {
     if (amountSelected === 3) {
-      return "green"
+      return "#22577A"
     } else if (amountSelected > 3) {
       return "red"
     } else {
-      return `linear-gradient(to right, blue ${amountSelected * 100 / 3}%, white 0%)`
+      return `linear-gradient(to right, #22577A ${amountSelected * 100 / 3}%, #57cc99 0%)`
     }
   }
 
@@ -107,8 +107,8 @@ export default function GifSelector() {
         { state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>) }
       </div>
       <div style={{ textAlign: "center", height: "100px" }}>
-        <button style={{ fontSize: "20px" }} onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
-        {!state.validSelection && <p style={{ color: "red", fontStyle: "italic" }}>Please select 3 GIFs</p>}
+        <button style={{ fontSize: "20px", borderRadius: "5px", border: "5px solid black", background: "white", boxShadow:"-2px 2px black" }} onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
+        {!state.validSelection && <p style={{ color: "var(--colour-60)", fontStyle: "italic" }}>Please select 3 GIFs</p>}
       </div>
     </div>
   )

@@ -6,14 +6,16 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <BrowserRouter>
-      <h1 style={{textAlign: "center"}}>Spotify Mood</h1>
-      <Routes>
-        <Route path='/' element={<GifSelector></GifSelector>} />
-        <Route path="/song" element={<SongDisplay></SongDisplay>} />
-      </Routes>
-      <Footer></Footer>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <h1 style={{ textAlign: "center", color: "#38A3A5" }}>Spotify Mood</h1>
+        <Routes>
+          <Route path='/' element={<GifSelector></GifSelector>} />
+          <Route path="/song" element={<SongDisplay></SongDisplay>} />
+        </Routes>
+        <Footer></Footer>
+      </BrowserRouter>
+    </div>
   );
 }
 

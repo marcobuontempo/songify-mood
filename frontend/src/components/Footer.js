@@ -3,8 +3,8 @@ import React from 'react'
 export default function Footer() {
   return (
     <div>
-      <p>Github Source</p>
-      <p>Create by</p>
+      <a href="https://github.com/marcobuontempo/spotify-mood">Github Source</a>
+      <p>Created by Marco Buontempo (2022)</p>
     </div>
   )
 }

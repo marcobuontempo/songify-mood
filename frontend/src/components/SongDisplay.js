@@ -19,9 +19,9 @@ export default function SongDisplay() {
   }, [])
 
   return (
-    <>
+    <div>
       {state.songData ? <SongEmbed songData={state.songData}></SongEmbed> : <p>No song data provided</p>}
       <Button variant="dark" onClick={() => navigate("/")}>Try a different combination?</Button>
-    </>
+    </div>
   )
 }

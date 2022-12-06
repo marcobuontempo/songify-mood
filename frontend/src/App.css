@@ -2,4 +2,8 @@
   text-align: center;
   background: #c7f9cc;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

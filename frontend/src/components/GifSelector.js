@@ -21,16 +21,17 @@ export default function GifSelector() {
 
   const gifContainerStyle = {
     display: 'flex',
-    width: "90%",
     flexWrap: 'wrap',
+    width: "100%",
     gap: '1rem',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '50px',
-    margin: '10px',
+    padding: '10px',
+    marginBottom: '10px',
     border: '1px solid black',
     borderRadius: '25px',
-    background: "white"
+    background: "white",
+    height: "352px"
   }
 
   const getGifs = async () => {
@@ -99,7 +100,7 @@ export default function GifSelector() {
   }, [])
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "10px" }}>
       <p style={{ margin: "0" }}>Select 3 GIFs based on your mood, and receive a song based on those selections!</p>
       <p style={{ margin: "0" }}>There are 455 potential combinations to get :)</p>
       <div style={{ ...gifContainerStyle, background: fillBackgroundContainer(state.amountSelected) }}>
@@ -107,7 +108,7 @@ export default function GifSelector() {
         { state.gifsError && <p>Error loading gifs...</p> }
         { state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>) }
       </div>
-      <div style={{ textAlign: "center", height: "100px" }}>
+      <div style={{ textAlign: "center" }}>
         <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>Get my song!</Button>
         {!state.validSelection && <p style={{ color: "var(--colour-60)", fontStyle: "italic" }}>Please select 3 GIFs</p>}
       </div>

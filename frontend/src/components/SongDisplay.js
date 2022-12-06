@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 import SongEmbed from './SongEmbed';
 
 
@@ -20,7 +21,7 @@ export default function SongDisplay() {
   return (
     <>
       {state.songData ? <SongEmbed songData={state.songData}></SongEmbed> : <p>No song data provided</p>}
-      <button onClick={() => navigate("/")}>Try a different combination?</button>
+      <Button variant="dark" onClick={() => navigate("/")}>Try a different combination?</Button>
     </>
   )
 }

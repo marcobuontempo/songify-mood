@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner';
 import GifDisplay from './GifDisplay'
@@ -107,7 +108,7 @@ export default function GifSelector() {
         { state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>) }
       </div>
       <div style={{ textAlign: "center", height: "100px" }}>
-        <button style={{ fontSize: "20px", borderRadius: "5px", border: "5px solid black", background: "white", boxShadow:"-2px 2px black" }} onClick={submitGifs} disabled={!state.validSelection}>GET MY SONG!</button>
+        <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>Get my song!</Button>
         {!state.validSelection && <p style={{ color: "var(--colour-60)", fontStyle: "italic" }}>Please select 3 GIFs</p>}
       </div>
     </div>

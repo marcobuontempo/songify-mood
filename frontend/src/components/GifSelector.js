@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner';
-import GifDisplay from './GifDisplay'
+import GifDisplay from './GifDisplay';
+import tenorlogo from '../images/PB_tenor.png'
 
 const GIF_URL = process.env.REACT_APP_EXPRESS_URL + "/gifs/random"
 const SONG_URL = process.env.REACT_APP_EXPRESS_URL + "/songs/find"
@@ -105,13 +106,14 @@ export default function GifSelector() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0px 10px" }}>
       <div style={{ padding: "10px" }}>
-        <p style={{ margin: "0" }}>Select 3 GIFs based on your mood, and receive a song based on those selections!</p>
-        <p style={{ margin: "0" }}>There are 455 potential combinations to get :)</p>
+        <p style={{ margin: "0" }}>Select 3 GIFs based on your mood, and receive a song suggestion based on those selections!</p>
+        <p style={{ margin: "0" }}>There are 455 unique combinations to explore, refreshed daily :)</p>
       </div>
       <div style={{ ...gifContainerStyle, background: fillBackgroundContainer(state.amountSelected) }}>
         {!state.loadingGifs && <Spinner animation="border" variant="success" />}
         {state.gifsError && <p>Error loading gifs...</p>}
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
+        <img src={tenorlogo} alt="Tenor Attribution" style={{maxWidth: "100px", position: "absolute", bottom: "10px", right: "10px", background: "black", padding: "5px", borderRadius: "5px" }}></img>
       </div>
       <div style={{ textAlign: "center" }}>
         <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>{state.validSelection ? "Get my song!" : "Please select 3 GIFs"}</Button>

@@ -8,10 +8,14 @@ var logger = require('morgan');
 let mongoose = require('mongoose')
 require('dotenv').config()
 const cronScheduler = require('./worker/cron-scheduler')
+
 // ROUTES
 var indexRouter = require('./routes/index');
 var gifsRouter = require('./routes/gifs');
 var songsRouter = require('./routes/songs');
+
+// NODE ARGS
+var args = process.argv.slice(2);
 
 // EXPRESS APP
 var app = express();
@@ -33,12 +37,10 @@ mongoose.connect(process.env.MONGO_URI)
   })
 
 
-/*
-NOTE: call cronScheduler() if you want to enable cron job -
-fetches and updates all gifs and songs in database everyday 12am
-*/
 // CRON JOBS
-// cronScheduler()
+if(args.includes("--withCron")) {
+  cronScheduler()
+}
 
 // MAIN ENDPOINTS
 app.use('/', indexRouter);

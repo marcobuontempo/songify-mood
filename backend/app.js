@@ -33,13 +33,17 @@ mongoose.connect(process.env.MONGO_URI)
   })
 
 
+/*
+NOTE: call cronScheduler() if you want to enable cron job -
+fetches and updates all gifs and songs in database everyday 12am
+*/
 // CRON JOBS
-cronScheduler()
+// cronScheduler()
 
 // MAIN ENDPOINTS
 app.use('/', indexRouter);
 app.use('/gifs', gifsRouter);
-app.use('/songs', songsRouter)
+app.use('/songs', songsRouter);
 
 
 // ERROR HANDLERS

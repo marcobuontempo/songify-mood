@@ -31,7 +31,8 @@ export default function GifSelector() {
     border: '1px solid black',
     borderRadius: '25px',
     background: "white",
-    height: "352px"
+    height: "352px",
+    position: "relative"
   }
 
   const getGifs = async () => {
@@ -51,7 +52,7 @@ export default function GifSelector() {
       .catch(err => {
         setState({ ...state, gifsError: true })
       })
-      setState({...state, loadingGifs: false})    
+    setState({ ...state, loadingGifs: false })
   }
 
   const fillBackgroundContainer = (amountSelected) => {
@@ -100,17 +101,19 @@ export default function GifSelector() {
   }, [])
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "10px" }}>
-      <p style={{ margin: "0" }}>Select 3 GIFs based on your mood, and receive a song based on those selections!</p>
-      <p style={{ margin: "0" }}>There are 455 potential combinations to get :)</p>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0px 10px" }}>
+      <div style={{ padding: "10px" }}>
+        <p style={{ margin: "0" }}>Select 3 GIFs based on your mood, and receive a song based on those selections!</p>
+        <p style={{ margin: "0" }}>There are 455 potential combinations to get :)</p>
+      </div>
       <div style={{ ...gifContainerStyle, background: fillBackgroundContainer(state.amountSelected) }}>
-        { !state.loadingGifs && <Spinner animation="border" variant="success" /> }
-        { state.gifsError && <p>Error loading gifs...</p> }
-        { state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>) }
+        {!state.loadingGifs && <Spinner animation="border" variant="success" />}
+        {state.gifsError && <p>Error loading gifs...</p>}
+        {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
+        {!state.validSelection && <p style={{ color: "var(--colour-60)", fontStyle: "italic", margin: "0px", position: "absolute", bottom: "10px" }}>Please select 3 GIFs</p>}
       </div>
       <div style={{ textAlign: "center" }}>
         <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>Get my song!</Button>
-        {!state.validSelection && <p style={{ color: "var(--colour-60)", fontStyle: "italic" }}>Please select 3 GIFs</p>}
       </div>
     </div>
   )

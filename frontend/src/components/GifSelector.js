@@ -110,10 +110,9 @@ export default function GifSelector() {
         {!state.loadingGifs && <Spinner animation="border" variant="success" />}
         {state.gifsError && <p>Error loading gifs...</p>}
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
-        {!state.validSelection && <p style={{ color: "var(--colour-60)", fontStyle: "italic", margin: "0px", position: "absolute", bottom: "10px" }}>Please select 3 GIFs</p>}
       </div>
       <div style={{ textAlign: "center" }}>
-        <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>Get my song!</Button>
+        <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>{state.validSelection ? "Get my song!" : "Please select 3 GIFs"}</Button>
       </div>
     </div>
   )

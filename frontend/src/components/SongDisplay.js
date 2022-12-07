@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import SongEmbed from './SongEmbed';
+import spotifylogo from '../images/spotifylogo.png'
 
 
 export default function SongDisplay() {
@@ -19,8 +20,9 @@ export default function SongDisplay() {
   }, [])
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
       {state.songData ? <SongEmbed songData={state.songData}></SongEmbed> : <p>No song data provided</p>}
+      <img src={spotifylogo} alt="Spotify Attribution" style={{width: "100px", position: "absolute", bottom: "0px", right: "0px", padding: "10px"}}></img>
       <Button variant="dark" onClick={() => navigate("/")}>Try a different combination?</Button>
     </div>
   )

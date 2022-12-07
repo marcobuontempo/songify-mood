@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner';
 import GifDisplay from './GifDisplay';
-import tenorlogo from '../images/PB_tenor.png'
+import tenorlogo from '../images/tenorlogo.png'
 
 const GIF_URL = process.env.REACT_APP_EXPRESS_URL + "/gifs/random"
 const SONG_URL = process.env.REACT_APP_EXPRESS_URL + "/songs/find"

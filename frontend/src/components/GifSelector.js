@@ -28,11 +28,12 @@ export default function GifSelector() {
     alignItems: 'center',
     padding: '10px',
     marginBottom: '10px',
-    border: '1px solid black',
+    border: '1px solid #22577A',
     borderRadius: '25px',
     background: "white",
-    height: "352px",
-    position: "relative"
+    minHeight: "352px",
+    position: "relative",
+    boxShadow: "0 0 15px black"
   }
 
   const getGifs = async () => {
@@ -59,9 +60,10 @@ export default function GifSelector() {
     if (amountSelected === 3) {
       return "#22577A"
     } else if (amountSelected > 3) {
-      return "red"
+      return "#FF595E"
     } else {
-      return `linear-gradient(to right, #22577A ${amountSelected * 100 / 3}%, #57cc99 0%)`
+      const calc = amountSelected * 100 / 3
+      return `linear-gradient(to right, #22577A ${calc-5}%, #57cc99 ${calc}%, #57cc99 0%)`
     }
   }
 

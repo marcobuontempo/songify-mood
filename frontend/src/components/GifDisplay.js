@@ -6,9 +6,8 @@ export default function GifDisplay(props) {
   const style = {
     border: selected ? "5px solid #C7F9CC" : "5px solid rgba(0,0,0,0)",
     borderRadius: "25px",
-    scale: selected && "1.02",
-    maxWidth: "250px",
-    maxHeight: "100px",
+    scale: selected && "1.03",
+    height: "156px",
     cursor: "pointer"
   }
 

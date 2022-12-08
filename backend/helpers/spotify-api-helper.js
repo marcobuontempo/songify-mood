@@ -1,6 +1,7 @@
 const axios = require("axios");
-const SpotifyModel = require('../models/spotify-model')
+const SongsModel = require('../models/songs-model')
 
+// function to artificially add breaks between API calls
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 // get spotify authorisation token and api access
@@ -48,7 +49,6 @@ const getRandom = (inpArr) => {
 }
 
 const searchRandomSpotifyTrack = async (authToken) => {
-  console.log("getting track 2...")
   const randomCharacter = getRandom("abcdefghijklmnopqrstuvwxyz") + "*"  // get random letter and append wildcard character to end
   const randomOffset = Math.floor(Math.random() * 100)
   const searchTerm = randomCharacter + "&offset=" + randomOffset
@@ -59,7 +59,6 @@ const searchRandomSpotifyTrack = async (authToken) => {
 const getSpotifyTrack = async (authToken, searchTerms) => {
   let attempts = 0
   try {
-    console.log("getting track 3...")
     let tracks = await searchSpotifyTracks(authToken, searchTerms)
     if (tracks.length === 0) {
       tracks = await searchRandomSpotifyTrack(authToken)
@@ -120,7 +119,7 @@ module.exports.insertSpotifyDocsToDB = async (newSpotifyDocs) => {
   }
 
   console.log("updating Spotify docs in DB...")
-  const insertedDocs = await SpotifyModel.insertMany(newSpotifyDocs)
+  const insertedDocs = await SongsModel.insertMany(newSpotifyDocs)
   return insertedDocs
 }
 
@@ -133,15 +132,11 @@ module.exports.deleteOldSpotifyDocsFromDB = async (insertedDocs) => {
   // check if insert was successful (i.e. input array is length==455)
   if (insertedIDs.length === 455) {
     // if successful, delete all docs that are NOT in new _ids
-    await SpotifyModel.deleteMany({ "_id": { "$nin": insertedIDs } })
+    await SongsModel.deleteMany({ "_id": { "$nin": insertedIDs } })
     console.log("fetching and updating completed")
   } else {
     // if unsuccessful, delete any newly inserted docs, i.e. where docs match any _ids
-    await SpotifyModel.deleteMany({ "_id": { "$in": insertedIDs } })
+    await SongsModel.deleteMany({ "_id": { "$in": insertedIDs } })
     throw Error(`Unexpected document insertion - only inserted ${insertedIDs.length} documents`)
   }
 }
-
-
-
-

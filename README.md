@@ -176,6 +176,9 @@ npm run deploy
 
 ### **Frontend**
 1. 6 random GIFs are fetched from the backend server (from a pool of 15 GIFs)
-2. When the user chooses 3 GIFs and submits, a request is made to the backend with the `_ids` of each selected GIF
-3. The backend finds the matching MongoDB document that contains all 3 `_ids`, and therefore returns the matching song information (which was calculated/stored during last backend update)
-4. This song is shown in an embedded Spotify player in browser, for the user to listen to and explore further
+
+1. When the user chooses 3 GIFs and submits, a request is made to the backend with the `_ids` of each selected GIF
+
+1. The backend finds the matching MongoDB document that contains all 3 `_ids`, and therefore returns the matching song information (which was calculated/stored during last backend update)
+
+1. This song is shown in an embedded Spotify player in browser, for the user to listen to and explore further

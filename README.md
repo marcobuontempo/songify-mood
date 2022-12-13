@@ -7,6 +7,7 @@
 
 ## About
 - Songify Mood is a full-stack MERN application
+- The user experience is simple and intuitive - this is possible due to the backend's design to allow for a consistent and up-to-date data
 - Users are prompted to select 3 GIF images based on their mood
 - Once selected, a predefined song is suggested to the user based on those selections
 - GIFs and song suggestions are updated daily at 12am AEST
@@ -92,7 +93,7 @@ npm run deploy
 - Tenor GIFs API
 
 ### Packages, Frameworks and Libraries:
-- Refer to `/frontend/package.json` and `/backend/package.json` for complete list
+- Refer to the dependency packages in `/frontend/package.json` and `/backend/package.json` for complete list
 
 
 ## Implementation

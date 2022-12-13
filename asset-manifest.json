@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.560f233f.css",
-    "main.js": "/static/js/main.d46124e3.js",
-    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
-    "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.6959d0d983ee318f8880.woff",
-    "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.b2e5aab643c6f0fd2da6.woff2",
-    "static/media/spotifylogo.png": "/static/media/spotifylogo.0d1e5545dee9f6dc1079.png",
-    "static/media/tenorlogo.png": "/static/media/tenorlogo.cf128afc78224eb6d0b1.png",
-    "index.html": "/index.html",
-    "main.560f233f.css.map": "/static/css/main.560f233f.css.map",
-    "main.d46124e3.js.map": "/static/js/main.d46124e3.js.map",
-    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+    "main.css": "/songify-mood/static/css/main.2563c247.css",
+    "main.js": "/songify-mood/static/js/main.55ef2dfd.js",
+    "static/js/787.cda612ba.chunk.js": "/songify-mood/static/js/787.cda612ba.chunk.js",
+    "static/media/bootstrap-icons.woff?": "/songify-mood/static/media/bootstrap-icons.6959d0d983ee318f8880.woff",
+    "static/media/bootstrap-icons.woff2?": "/songify-mood/static/media/bootstrap-icons.b2e5aab643c6f0fd2da6.woff2",
+    "static/media/spotifylogo.png": "/songify-mood/static/media/spotifylogo.0d1e5545dee9f6dc1079.png",
+    "static/media/tenorlogo.png": "/songify-mood/static/media/tenorlogo.cf128afc78224eb6d0b1.png",
+    "index.html": "/songify-mood/index.html",
+    "main.2563c247.css.map": "/songify-mood/static/css/main.2563c247.css.map",
+    "main.55ef2dfd.js.map": "/songify-mood/static/js/main.55ef2dfd.js.map",
+    "787.cda612ba.chunk.js.map": "/songify-mood/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.560f233f.css",
-    "static/js/main.d46124e3.js"
+    "static/css/main.2563c247.css",
+    "static/js/main.55ef2dfd.js"
   ]
 }

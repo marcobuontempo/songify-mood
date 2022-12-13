@@ -113,7 +113,7 @@ export default function GifSelector() {
         {!state.loadingGifs && <Spinner animation="border" variant="success" />}
         {state.gifsError && <p>Error loading gifs...</p>}
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
-        <img src={tenorlogo} alt="Tenor Attribution" style={{maxWidth: "100px", position: "absolute", bottom: "10px", right: "10px", background: "black", padding: "5px", borderRadius: "5px" }}></img>
+        <img src={tenorlogo} alt="Tenor Attribution" style={{maxWidth: "100px", position: "absolute", bottom: "10px", right: "10px", background: "rgba(0,0,0,0.8)", padding: "5px", borderRadius: "5px" }}></img>
       </div>
       <div style={{ textAlign: "center" }}>
         <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>{state.validSelection ? "Get my song!" : "Please select 3 GIFs"}</Button>

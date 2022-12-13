@@ -64,7 +64,7 @@ export default function GifSelector() {
       return "#FF595E"
     } else {
       const calc = amountSelected * 100 / 3
-      return `linear-gradient(to right, #22577A ${calc-5}%, #57cc99 ${calc}%, #57cc99 0%)`
+      return `linear-gradient(to right, #22577A ${calc - 5}%, #57cc99 ${calc}%, #57cc99 0%)`
     }
   }
 
@@ -110,10 +110,16 @@ export default function GifSelector() {
         <p style={{ margin: "0" }}>There are 455 unique combinations to explore, refreshed daily :)</p>
       </div>
       <div style={{ ...gifContainerStyle, background: fillBackgroundContainer(state.amountSelected) }}>
-        {!state.loadingGifs && <Spinner animation="border" variant="success" />}
+        {
+          !state.loadingGifs &&
+          <div>
+            <Spinner animation="border" variant="success" />
+            <p className="waiting-message">Please be patient… the initial load may take additional time due to the server winding back up</p>
+          </div>
+        }
         {state.gifsError && <p>Error loading gifs...</p>}
         {state.gifs.map(gif => <GifDisplay gif={gif} toggleSelectedGif={toggleSelectedGif} key={gif.url}></GifDisplay>)}
-        <img src={tenorlogo} alt="Tenor Attribution" style={{maxWidth: "100px", position: "absolute", bottom: "10px", right: "10px", background: "rgba(0,0,0,0.8)", padding: "5px", borderRadius: "5px" }}></img>
+        <img src={tenorlogo} alt="Tenor Attribution" style={{ maxWidth: "100px", position: "absolute", bottom: "10px", right: "10px", background: "rgba(0,0,0,0.8)", padding: "5px", borderRadius: "5px" }}></img>
       </div>
       <div style={{ textAlign: "center" }}>
         <Button variant="dark" onClick={submitGifs} disabled={!state.validSelection}>{state.validSelection ? "Get my song!" : "Please select 3 GIFs"}</Button>

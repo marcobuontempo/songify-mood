@@ -10,10 +10,12 @@
 - Users are prompted to select 3 GIF images based on their mood
 - Once selected, a predefined song is suggested to the user based on those selections
 - GIFs and song suggestions are updated daily at 12am AEST
+
 ### Technologies
 - MongoDB *(for storage/cache of GIF and Songs information)*
 - Express & Node.js *(for backend server)*
 - React *(for frontend website display)*
+
 ### Deployment Platforms
 - [MongoDB Cloud](https://cloud.mongodb.com/v2/)
 - [Render - Node Server](https://render.com/)
@@ -22,7 +24,8 @@
 
 ## Limitations
 - The algorithm implemented in this project is simple and naive. This is because it simply takes a tag related to each selected GIF image, and directly searches Spotify with these terms. As a result:
-    - The search term provided to Spotify may be non-sensical, and therefore return a questionable suggestion
+    - The search term provided to Spotify may be non-sensical, and therefore return a odd suggestion
+    - Multiple combinations may potentially return the same song, depending on how the Spotify API handles the tag queries
     - If no song is found based on search terms, a random Spotify song will be fetched instead
     - However, since it is simple and intuitive in nature, in many instances it should succeed in providing a song related to the selected GIFs
 - Due to using free services, the Node server on Render will often "sleep", and therefore fail to maintain the scheduled cron job. As a workaroud, an `/update` endpoint was created - and an external scheduler (cron-job.org) is used to wake the server and force the update instead.

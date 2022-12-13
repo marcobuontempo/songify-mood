@@ -96,7 +96,7 @@ export default function GifSelector() {
     })
       .then(res => res.data)
       .then(data => data.song_data)
-    navigate("/song", { state: { songData: songData } })
+    navigate("/songify-mood/song/", { state: { songData: songData } })
   }
 
   useEffect(() => {

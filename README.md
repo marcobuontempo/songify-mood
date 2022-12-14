@@ -159,7 +159,7 @@ npm run deploy
     - Test endpoint to check server health
     - Should return `200 OK`
 
-- `/update` 
+- `/update?key=<user defined key in .env>` 
     - Forces an update of GIFs and Songs in DB
 
 - `/gifs`

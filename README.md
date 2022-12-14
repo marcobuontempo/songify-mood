@@ -130,13 +130,13 @@ npm run deploy
     1. For each GIF combination, use its combinationTags to directly query/search Spotify API for a matching track
     </br>*i.e. query = gif1Tag + " " + gif2Tag + " " + gif3Tag*
 
-    1. As fallback, if Spotify API search returns no tracks, fetch a random song instead
-    *searches a random letter a-z, and then a random result in the top 100 for that letter)*
+    1. As fallback, if the Spotify API search returns no tracks, fetch a random song instead
+    </br>*searches a random letter a-z, and then a random result in the top 100 for that letter)*
 
     1. If search fails (likely `429 error: too many requests`), waits 30 seconds before retrying. It repeats this a total of 5 times to try and receive a `200 OK` response - otherwise, it will eventually cancel the update request. 
-    *Spotify API has an undeterminable amount of requests, but records #requests within a 30 second window. This implemented method should almost guarantee that the API request eventually returns a correct response*
+    </br>*Spotify API has an undefined amount of requests allowed within a 30 second window. This implemented method should almost guarantee that the API request eventually returns a correct response*
 
-    1. Repeat the above Spotify search for all 455 GIF combinations, with an artificially placed 1 second delay between each search. This also helps to limit the Spotify API from returning errors
+    1. Repeat the above Spotify search for all 455 GIF combinations, with an artificially placed 1 second delay between each search - this additionally helps to limit the Spotify API from returning errors
 
     1. Each completed GIF combination and song data is stored into MongoDB
         ```

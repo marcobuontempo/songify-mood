@@ -8,7 +8,8 @@ export default function GifDisplay(props) {
     borderRadius: "25px",
     scale: selected && "1.03",
     height: "156px",
-    cursor: "pointer"
+    cursor: "pointer",
+    maxWidth: "100%"
   }
 
   const handleOnClick = () => {

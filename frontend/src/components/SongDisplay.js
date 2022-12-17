@@ -23,7 +23,7 @@ export default function SongDisplay() {
     <div style={{position:"relative"}}>
       {state.songData ? <SongEmbed songData={state.songData}></SongEmbed> : <p>No song data provided</p>}
       <img src={spotifylogo} alt="Spotify Attribution" style={{width: "100px", position: "absolute", bottom: "0px", right: "0px", padding: "10px"}}></img>
-      <Button variant="dark" onClick={() => navigate("/songify-mood/")}>Try a different combination?</Button>
+      <Button variant="dark" onClick={() => navigate("/songify-mood/")} style={{zIndex:1, position:"relative"}}>Try a different combination?</Button>
     </div>
   )
 }
